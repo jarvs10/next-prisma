@@ -13,11 +13,24 @@ const NewCita = ({ params }) => {
 
   const [citas, setCitas] = useState({
     cita: "",
-    fecha: "",
+    fecha: '',
     hora: "",
   });
 
+  const [citaExiste, setCitaExiste] = useState([]);
+
   const {cita, fecha, hora} = citas;
+
+  useEffect(() => {
+    const getCitas = async () => {
+      const citas = await axios.get(
+        'http://localhost:3000/api/agendas'
+      );
+
+      setCitaExiste(citas.data);
+    };
+    getCitas();
+  }, [])
 
   useEffect(() => {
     if (idCita) {
@@ -48,6 +61,16 @@ const NewCita = ({ params }) => {
 
       return;
     }
+
+    const citaExistente = citaExiste.filter(citica => {
+      if(citica.hora === hora && citica.fecha === fecha){
+        console.log('ya tienes una cita para esta hora');
+
+        return;
+      }
+    })
+
+    console.log(citaExistente);
 
     try {
       if (idCita) {

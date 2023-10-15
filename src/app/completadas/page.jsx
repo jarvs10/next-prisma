@@ -26,10 +26,6 @@ const CitasCompletadas = () => {
 
       toast.success('deleted successfully');
 
-      // setTimeout(() => {
-      //   location.reload();
-      // }, 2000);
-
     } catch (error) {
       toast.error(error.message);
     }

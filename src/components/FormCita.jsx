@@ -1,4 +1,4 @@
-import { horas } from "@/helpers/config";
+import { generarFecha, horas } from "@/helpers/config";
 import React from "react";
 
 const FormCita = ({ handleChange, citas, handleSubmit, idCita }) => {
@@ -29,7 +29,7 @@ const FormCita = ({ handleChange, citas, handleSubmit, idCita }) => {
           <label className="block mb-2 text-xl" htmlFor="fecha">
             Fecha:
           </label>
-          <input onChange={handleChange} value={fecha} className="text-black py-2 px-6 rounded-md" type="date" name="fecha" id="fecha" />
+          <input onChange={handleChange} value={fecha} className="text-black py-2 px-6 rounded-md" type="date" name="fecha" id="fecha" min={'2023-10-15'} />
         </div>
 
         <div className="mt-10">
