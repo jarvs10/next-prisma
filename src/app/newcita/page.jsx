@@ -19,7 +19,7 @@ const NewCita = ({ params }) => {
 
   const [citaExiste, setCitaExiste] = useState([]);
 
-  const {cita, fecha, hora} = citas;
+  const { cita, fecha, hora } = citas;
 
   useEffect(() => {
     const getCitas = async () => {
@@ -50,27 +50,28 @@ const NewCita = ({ params }) => {
   }, []);
 
   const handleChange = ({ target: { name, value } }) => {
-    setCitas( {...citas, [name]: value} );
+    setCitas({ ...citas, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(cita === '' || fecha === '' || hora === ''){
+    if (cita === '' || fecha === '' || hora === '') {
       toast.error('Todos los campos son necesarios');
 
       return;
     }
 
-    const citaExistente = citaExiste.filter(citica => {
-      if(citica.hora === hora && citica.fecha === fecha){
-        console.log('ya tienes una cita para esta hora');
+    const citaExistente = citaExiste.some(citica => citica.hora === hora && citica.fecha === fecha)
+    if (citaExistente) {
+      const filtrar = citaExiste.filter(cito => {
+        if (cito.hora === hora && cito.fecha === fecha) {
+          return cito;
+        }
+      });
 
-        return;
-      }
-    })
-
-    console.log(citaExistente);
+      console.log(filtrar);
+    }
 
     try {
       if (idCita) {
